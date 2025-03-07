@@ -9,7 +9,7 @@ import App from "./App.jsx";
 import React, { useEffect } from "react";
 
 // 🛠 Function jo errors ko body me append karega
-const appendLogToPage = (type, message) => {
+const appendLogToPage = (type, message, stack = null) => {
   let logContainer = document.getElementById("log-container");
 
   if (!logContainer) {
@@ -22,19 +22,30 @@ const appendLogToPage = (type, message) => {
     logContainer.style.bottom = "10px";
     logContainer.style.left = "10px";
     logContainer.style.width = "50%";
-    logContainer.style.maxHeight = "200px";
+    logContainer.style.maxHeight = "250px";
     logContainer.style.overflowY = "auto";
-    logContainer.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+    logContainer.style.backgroundColor = "rgba(0, 0, 0, 0.9)";
     logContainer.style.color = "white";
     logContainer.style.padding = "10px";
     logContainer.style.borderRadius = "5px";
     logContainer.style.zIndex = "9999";
     logContainer.style.fontSize = "12px";
     logContainer.style.fontFamily = "monospace";
+    logContainer.style.whiteSpace = "pre-wrap"; // 🔹 Error message wrap hoga
   }
 
   const logDiv = document.createElement("div");
-  logDiv.innerText = `[${type.toUpperCase()}] ${message}`;
+  logDiv.style.marginBottom = "10px";
+
+  logDiv.innerHTML = `<strong>[${type.toUpperCase()}]</strong> ${message}`;
+
+  if (stack) {
+    const stackDiv = document.createElement("div");
+    stackDiv.style.color = "gray";
+    stackDiv.style.fontSize = "10px";
+    stackDiv.innerText = stack;
+    logDiv.appendChild(stackDiv);
+  }
 
   if (type === "error") logDiv.style.color = "red";
   if (type === "warn") logDiv.style.color = "yellow";
@@ -63,19 +74,22 @@ const GlobalLogger = ({ children }) => {
     // Console errors capture karna
     const originalConsoleError = console.error;
     console.error = (...args) => {
-      appendLogToPage("error", args.join(" "));
+      const errorMessage = args.join(" ");
+      let errorStack = args[0]?.stack || "";
+      appendLogToPage("error", errorMessage, errorStack);
       originalConsoleError(...args);
     };
 
     // Global errors capture karna
     window.onerror = (message, source, lineno, colno, error) => {
       const errorMsg = `${message} at ${source}:${lineno}:${colno}`;
-      console.error(errorMsg);
+      const errorStack = error?.stack || "No stack trace available";
+      appendLogToPage("error", errorMsg, errorStack);
     };
 
     // Unhandled promise rejection handle karna
     window.addEventListener("unhandledrejection", (event) => {
-      console.error("Unhandled Promise Rejection:", event.reason);
+      appendLogToPage("error", "Unhandled Promise Rejection:", event.reason?.stack || event.reason);
     });
 
     return () => {
