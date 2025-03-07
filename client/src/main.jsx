@@ -8,8 +8,8 @@ import "./assets/index.css";
 import App from "./App.jsx";
 import React, { useEffect } from "react";
 
-// 🛠 Function jo errors ko body me append karega
-const appendLogToPage = (type, message, stack = null) => {
+// 🛠 Function jo error ko body me append karega
+const appendLogToPage = (type, message, details = null) => {
   let logContainer = document.getElementById("log-container");
 
   if (!logContainer) {
@@ -17,12 +17,12 @@ const appendLogToPage = (type, message, stack = null) => {
     logContainer.id = "log-container";
     document.body.appendChild(logContainer);
 
-    // Style for logs
+    // Styling
     logContainer.style.position = "fixed";
     logContainer.style.bottom = "10px";
     logContainer.style.left = "10px";
-    logContainer.style.width = "50%";
-    logContainer.style.maxHeight = "250px";
+    logContainer.style.width = "60%";
+    logContainer.style.maxHeight = "300px";
     logContainer.style.overflowY = "auto";
     logContainer.style.backgroundColor = "rgba(0, 0, 0, 0.9)";
     logContainer.style.color = "white";
@@ -31,20 +31,19 @@ const appendLogToPage = (type, message, stack = null) => {
     logContainer.style.zIndex = "9999";
     logContainer.style.fontSize = "12px";
     logContainer.style.fontFamily = "monospace";
-    logContainer.style.whiteSpace = "pre-wrap"; // 🔹 Error message wrap hoga
+    logContainer.style.whiteSpace = "pre-wrap";
   }
 
   const logDiv = document.createElement("div");
   logDiv.style.marginBottom = "10px";
-
   logDiv.innerHTML = `<strong>[${type.toUpperCase()}]</strong> ${message}`;
 
-  if (stack) {
-    const stackDiv = document.createElement("div");
-    stackDiv.style.color = "gray";
-    stackDiv.style.fontSize = "10px";
-    stackDiv.innerText = stack;
-    logDiv.appendChild(stackDiv);
+  if (details) {
+    const detailsDiv = document.createElement("div");
+    detailsDiv.style.color = "gray";
+    detailsDiv.style.fontSize = "10px";
+    detailsDiv.innerText = details;
+    logDiv.appendChild(detailsDiv);
   }
 
   if (type === "error") logDiv.style.color = "red";
@@ -54,24 +53,24 @@ const appendLogToPage = (type, message, stack = null) => {
   logContainer.appendChild(logDiv);
 };
 
-// 🛠 Global Error Handling Component
+// 🛠 Global Error Logger
 const GlobalLogger = ({ children }) => {
   useEffect(() => {
-    // Console logs capture karna
+    // Console log override
     const originalConsoleLog = console.log;
     console.log = (...args) => {
       appendLogToPage("log", args.join(" "));
       originalConsoleLog(...args);
     };
 
-    // Console warnings capture karna
+    // Console warn override
     const originalConsoleWarn = console.warn;
     console.warn = (...args) => {
       appendLogToPage("warn", args.join(" "));
       originalConsoleWarn(...args);
     };
 
-    // Console errors capture karna
+    // Console error override
     const originalConsoleError = console.error;
     console.error = (...args) => {
       const errorMessage = args.join(" ");
@@ -80,14 +79,14 @@ const GlobalLogger = ({ children }) => {
       originalConsoleError(...args);
     };
 
-    // Global errors capture karna
+    // Global error handling
     window.onerror = (message, source, lineno, colno, error) => {
       const errorMsg = `${message} at ${source}:${lineno}:${colno}`;
       const errorStack = error?.stack || "No stack trace available";
       appendLogToPage("error", errorMsg, errorStack);
     };
 
-    // Unhandled promise rejection handle karna
+    // Unhandled promise rejection handling
     window.addEventListener("unhandledrejection", (event) => {
       appendLogToPage("error", "Unhandled Promise Rejection:", event.reason?.stack || event.reason);
     });
@@ -104,7 +103,30 @@ const GlobalLogger = ({ children }) => {
   return <>{children}</>;
 };
 
-// 🛠 Render the app with GlobalLogger
+// 🛠 Fetch wrapper jo CORS errors properly handle karega
+const fetchWithCorsHandling = async (url, options = {}) => {
+  try {
+    const response = await fetch(url, options);
+
+    if (!response.ok) {
+      // Agar CORS error ho, yeh details extract karega
+      const text = await response.text();
+      appendLogToPage(
+        "CORS ERROR",
+        `Request to: ${url} failed with status ${response.status}`,
+        `Response: ${text}`
+      );
+      throw new Error(`CORS Error: ${response.status} - ${text}`);
+    }
+
+    return response.json();
+  } catch (error) {
+    appendLogToPage("NETWORK ERROR", `Failed request to: ${url}`, error.message);
+    throw error;
+  }
+};
+
+// 🛠 GlobalLogger wrap karke render karna
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <ThemeProvider>
@@ -112,7 +134,7 @@ createRoot(document.getElementById("root")).render(
         <BackEndApiProvider>
           <UserDataProvider>
             <GlobalLogger>
-              <App />
+              <App fetchWithCorsHandling={fetchWithCorsHandling} />
             </GlobalLogger>
           </UserDataProvider>
         </BackEndApiProvider>
