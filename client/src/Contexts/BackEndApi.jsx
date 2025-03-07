@@ -9,7 +9,7 @@ export const useBackEndApi =()=>{
 }
 
 export const BackEndApiProvider =(props)=>{
-    const backEndApi ="http://192.168.18.18:8000";
+    const backEndApi ="https://job-board-liart-seven.vercel.app/";
 
     return(
         <BackEndApiContext.Provider value={{backEndApi:backEndApi}}>
