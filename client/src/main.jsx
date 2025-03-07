@@ -9,27 +9,49 @@ import App from "./App.jsx";
 import { useState, useEffect } from "react";
 import React from "react";
 
-const ErrorHandler = ({ children }) => {
+const GlobalErrorHandler = ({ children }) => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    window.onerror = function (message, source, lineno, colno, error) {
-      setError(`Error: ${message} at ${source}:${lineno}:${colno}`);
+    const handleError = (message, source, lineno, colno, error) => {
+      const errorMsg = `Error: ${message} at ${source}:${lineno}:${colno}`;
+      console.error(errorMsg);
+      setError(errorMsg);
     };
 
-    window.addEventListener("unhandledrejection", (event) => {
+    const handlePromiseRejection = (event) => {
+      console.error("Unhandled Promise Rejection:", event.reason);
       setError(`Unhandled Promise Rejection: ${event.reason}`);
-    });
+    };
+
+    window.onerror = handleError;
+    window.addEventListener("unhandledrejection", handlePromiseRejection);
 
     return () => {
       window.onerror = null;
-      window.removeEventListener("unhandledrejection", () => {});
+      window.removeEventListener("unhandledrejection", handlePromiseRejection);
     };
   }, []);
 
   return (
     <div>
-      {error && <div style={{ color: "red", fontWeight: "bold" }}>{error}</div>}
+      {error && (
+        <div
+          style={{
+            position: "fixed",
+            bottom: "10px",
+            left: "10px",
+            backgroundColor: "red",
+            color: "white",
+            padding: "10px",
+            borderRadius: "5px",
+            fontWeight: "bold",
+            zIndex: 9999,
+          }}
+        >
+          {error}
+        </div>
+      )}
       {children}
     </div>
   );
@@ -41,9 +63,9 @@ createRoot(document.getElementById("root")).render(
       <JobsProvider>
         <BackEndApiProvider>
           <UserDataProvider>
-            <ErrorHandler>
+            <GlobalErrorHandler>
               <App />
-            </ErrorHandler>
+            </GlobalErrorHandler>
           </UserDataProvider>
         </BackEndApiProvider>
       </JobsProvider>
