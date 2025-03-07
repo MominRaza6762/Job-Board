@@ -9,7 +9,7 @@ export const useBackEndApi =()=>{
 }
 
 export const BackEndApiProvider =(props)=>{
-    const backEndApi ="https://job-board-liart-seven.vercel.app/";
+    const backEndApi ="https://job-board-liart-seven.vercel.app";
 
     return(
         <BackEndApiContext.Provider value={{backEndApi:backEndApi}}>
