@@ -115,9 +115,9 @@ export default function HomePage() {
         setAllJobRetrieved(true);
       }
     } catch (error) {
-    //   setTimeout(() => {
-    //     navigate("/server_error", replace)
-    //   }, 1000);
+      setTimeout(() => {
+        navigate("/server_error", replace)
+      }, 1000);
       console.error("Error fetching jobs", error);
       toast.error("Failed to fetch jobs. Server-side error...");
     } finally {
