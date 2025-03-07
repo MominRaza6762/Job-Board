@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 8000;
 
 const app =express();
 app.use(cors({
-    origin: "https://job-board-client-delta.vercel",
+    origin: "https://job-board-client-delta.vercel.app",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true
