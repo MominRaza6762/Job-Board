@@ -10,7 +10,7 @@ import ApplicationsList from "../MyComponents/ApplicationsList";
 
 export default function AdminPage() {
   const {userData ,setUserData } = useUserData();
-  const [selectedPage, setSelectedPage] = useState(localStorage.getItem("adminNav"));
+  const [selectedPage, setSelectedPage] = useState(localStorage.getItem("adminNav") || "Dashboard");
   const navigate = useNavigate();
 
   const handleLogOut = ()=>{
