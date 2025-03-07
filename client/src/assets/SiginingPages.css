@@ -1,0 +1,155 @@
+.signingContent {
+    min-height: 100dvh; 
+    display: flex;
+    padding: 1vh 1vw;
+}
+
+.signingImage {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signingImage img {
+    height: 62vh;
+}
+
+.signingForm {
+    padding: 1.5vh 10.8vw;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signingForm h2 {
+    align-self: flex-start;
+    margin-bottom: 2vh;
+}
+
+.signingForm div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.7vh;
+    width: 27vw;
+}
+
+.signingForm div label {
+    font-size: var(--font-base);
+    font-weight: 400;
+    margin-bottom: 0.5vh;
+}
+
+.signingForm div input,
+.signingForm div select {
+    height: 6vh;
+    min-height: 3rem; 
+    border-radius: 1vh;
+    border: none;
+    outline: none;
+    background-color: var(--glassy-color);
+    padding: 0 1vw;
+    color: var(--secondary-text-color);
+    font-size: var(--font-sm);
+}
+
+.signingForm div input::placeholder {
+    color: var(--secondary-text-color);
+    font-size: var(--font-sm);
+}
+
+.signingForm div input[type="password"]::placeholder {
+    font-weight: bolder;
+    font-size: var(--font-md);
+}
+
+.signingForm div span {
+    color: red;
+    font-size: var(--font-sm);
+    margin-left: 0.2vw;
+}
+
+.signingForm div .checkBox {
+    font-size: var(--font-base);
+    align-items: center;
+    gap: 0.5vw;
+}
+
+.signingForm div .checkBox input {
+    margin-top: 1vh;
+    width: 2.5vw;
+    height: 2.5vh;
+    min-height: 1rem; 
+    cursor: pointer;
+    accent-color: var(--button-color);
+}
+
+.signingForm div .checkBox a {
+    text-decoration: underline;
+    color: var(--secondary-text-color);
+}
+
+.signingForm .spanClass {
+    align-self: flex-start;
+    text-decoration: underline;
+    color: var(--secondary-text-color);
+    font-size: var(--font-sm);
+    margin-bottom: 4vh;
+}
+
+.signingForm div button {
+    height: 5vh;
+    min-height: 3rem; 
+    color: var(--button-text-color);
+    background-color: var(--button-color);
+    border: none;
+    border-radius: 1vh;
+    font-weight: 400;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .signingContent {
+        flex-direction: column;
+        align-items: center;
+        padding: 2vh 5vw;
+        min-height: 100dvh; 
+    }
+
+    .signingImage {
+        display: none; 
+    }
+
+    .signingForm {
+        width: 100%;
+        padding: 3vh 3vw;
+    }
+
+    .signingForm div {
+        width: 100%;
+    }
+
+    .signingForm div input,
+    .signingForm div select {
+        height: 5.5vh;
+        min-height: 2.8rem; 
+        font-size: 1rem;
+        padding: 0 3vw;
+    }
+
+    .signingForm div button {
+        width: 100%;
+        height: 5.5vh;
+        min-height: 3rem; 
+        font-size: 1.1rem;
+    }
+
+    .signingForm div .checkBox input {
+        width: 5vw;
+        height: 2.5vh;
+        min-height: 1rem; 
+        margin-right: 2vw;
+    }
+}

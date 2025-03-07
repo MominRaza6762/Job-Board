@@ -1,0 +1,137 @@
+.navBar{
+    display: flex;
+    align-items: center;
+    width: 100vw;
+    justify-content: space-between;
+    padding: 1vh 1.5vw;
+}
+.navLogo{
+    width: 10vw;
+    height: 8vh;
+}
+.navLogo img{
+    width: 100%;
+    height: 100%;
+    object-fit:contain;
+    cursor: pointer;
+}
+
+.navProfile{
+    display: flex;
+    align-items: center;
+}
+.navProfile img{
+    margin-top: 1vh;
+    width: 7vw;
+    height: 7vh;
+    filter: invert(var(--invert));
+}
+
+.navButtons{
+    display: flex;
+}
+.navSignIn ,.navRigester{
+    height: 5vh;
+    background-color: var(--glassy-color);
+    border-radius: 1vh;
+    margin: 0vh 1vw;
+    padding: 1vh 1vw;
+    display: flex;
+    align-items: center;
+    font-size: var(--font-md);
+    font-weight: 500;
+    cursor: pointer;
+
+
+}
+.located{
+    background-color: var(--button-color);
+    color: var(--button-text-color);
+}
+
+.profile-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .profile-icon {
+    cursor: pointer;
+  }
+  
+  .profile-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--bg-color);
+    box-shadow: var(--card-shadow);
+    border-radius: 8px;
+    width: 11vw;
+    z-index: 100;
+  }
+  
+  .profile-dropdown ul {
+    list-style: none;
+  }
+  
+  .profile-dropdown li {
+    padding: 1vh 1vw;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .profile-dropdown li .link{
+    display: flex;
+  }
+  
+  .profile-dropdown li:hover {
+    background: var(--glassy-color);
+  }
+  
+
+
+@media screen and (max-width: 768px) {
+    .navBar {
+        align-items: center;
+        padding: 2vh 4vw;
+    }
+    .navProfile{
+        width: auto;
+    }
+    .profile-dropdown{
+        width: 42vw;
+    }
+    .profile-dropdown li{
+        padding: 1vh 4vw;
+        text-decoration: underline;
+    }
+
+    .navProfile img{
+        margin-top: 1vh;
+        width: 10vw;
+        height: auto;
+        margin-right: 4vw;
+    }
+
+    .navLogo {
+        width: 15vw;  
+        height: auto;
+    }
+
+    
+
+    .navButtons {
+        margin-top: 1vh;
+        flex-direction: row;
+        width: auto;
+        align-items: center;
+        gap: 2vw;
+    }
+
+    .navSignIn, .navRigester {
+        width: auto; 
+        font-size: var(--font-sm);
+        padding: 1.5vh 3vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

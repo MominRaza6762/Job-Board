@@ -1,0 +1,43 @@
+.jobCard{
+    display: flex;
+    flex-direction: column;
+    width: 30vw;
+    padding: 3vh 2vw;
+    border-radius: 1.5vh;
+    background-color: var(--bg-color);
+    box-shadow: var(--card-shadow)
+    
+}
+.cardCompany , .catdCategory{
+    margin-top: 0.2vh;
+    font-size: var(--font-md);
+    color: var(--secondary-text-color);
+    font-weight: 400;
+}
+.jobCard p{
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    overflow: hidden;
+    font-size: var(--font-md);
+    margin-top: 1vh;
+}
+
+@media screen and (max-width: 768px) {
+    .jobCard {
+        width: 80vw;
+        padding: 3vh 4vw; 
+        border-radius: 1vh;
+    }
+
+    .cardCompany, .catdCategory {
+        font-size: var(--font-base); 
+        margin-top: 1vh;
+    }
+
+    .jobCard p {
+        font-size: var(--font-base);
+        -webkit-line-clamp: 2; 
+    }
+}

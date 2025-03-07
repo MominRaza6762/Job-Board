@@ -1,0 +1,105 @@
+.custom-editProfilePage {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: var(--bg-color);
+    align-items: center;
+}
+
+.custom-edit-container {
+   min-width: 30vw;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-edit-card {
+    background: var(--bg-color);
+    padding: 2rem;
+    border-radius: 1.5vh;
+    box-shadow: var(--card-shadow);
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    color: var(--text-color);
+}
+
+.custom-edit-title {
+    font-size: 1.8rem;
+    margin-bottom: 2vh;
+}
+
+.custom-edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+}
+
+.custom-input-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.custom-input-group label {
+    font-size: 1rem;
+    margin-bottom: 0.5vh;
+    color: var(--text-color);
+}
+
+.custom-input-group input {
+    padding: 1vh 1vw;
+    border-radius: 1vh;
+    border: 1px solid var(--text-color);
+    background-color: var(--glassy-color);
+    color: var(--text-color);
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    color: var(--secondary-text-color);
+}
+
+.custom-input-group span{
+    color: red;
+}
+
+
+.custom-save-btn {
+    background-color: var(--button-color);
+    color: var(--button-text-color);
+    border: none;
+    padding: 1vh 1vw;
+    border-radius: 1vh;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+
+@media screen and (max-width: 768px) {
+    .custom-edit-container{
+        width: 100vw;
+    }
+    .custom-edit-card {
+        width: 80%;
+        padding: 1.5rem;
+    }
+
+    .custom-edit-title {
+        font-size: 1.5rem;
+    }
+
+    .custom-input-group label {
+        font-size: 0.9rem;
+    }
+
+    .custom-input-group input {
+        font-size: 0.9rem;
+    }
+
+    .custom-save-btn {
+        font-size: 1rem;
+        padding: 0.8vh 3vw;
+    }
+}

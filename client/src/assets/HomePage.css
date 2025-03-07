@@ -1,0 +1,161 @@
+
+.homePage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1vh;
+}
+.mainContent{
+    width: 75vw;
+    max-width: 1200px;
+    padding: 1vh 1vw;
+    display: flex;
+    flex-direction: column;
+    min-height: 62.1vh;
+}
+.searchInput{
+    margin-top: 4vh;
+    background-color: var(--glassy-color);
+    height: auto;
+    min-height: 6vh; 
+    border-radius: 1.5vh;
+    display: flex;
+    align-items: center;
+    padding: 0.5vh 1vw;
+    box-sizing: border-box;
+}
+.searchInput img{
+    width: 3vw;
+    height: 5.5vh;
+    cursor: pointer;
+}
+.searchInput input{
+    border: none;
+    height: 6vh;
+    width: 90%;
+    font-size: var(--font-md);
+    padding: 0.5vh 1vw;
+    font-weight: 400;
+    color: var(--secondary-text-color);
+    background-color: initial;
+    outline: none;
+    box-sizing: border-box;
+}
+.searchInput input::placeholder{
+    color: var(--secondary-text-color);
+}
+
+.categories{
+    margin: 4vh 0vw;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5vh 1vw; 
+
+}
+
+.categories div{
+    margin: 1.5vh 1vw;
+    background-color: var(--glassy-color);
+    padding: 1vh 1vw;
+    border-radius: 1vh;
+    font-size: var(--font-md);
+    font-weight: 450;
+    word-wrap: break-word;
+    cursor: pointer;
+}
+.selected {
+    background-color: var(--button-color) !important;
+    color:var(--button-text-color);
+}
+
+
+.jobList{
+    margin-top: 1vh;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5vh 1vw;
+    
+
+}
+.jobList .item{
+    margin: 1.5vh 1vw;
+    box-sizing: border-box;
+    flex: 1 1 45%;
+}
+.loadMore{
+    margin: 5vh 0vw;
+    background-color: var(--button-color);
+    color: var(--button-text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40vw;
+    height: 7vh;
+    border-radius: 1.5vh;
+    font-size: var(--font-md);
+    font-weight: bold;
+    cursor: pointer;
+}
+.noMore{
+    cursor:not-allowed;
+    color:red;
+    background-color: var(--glassy-color);
+}
+
+.saerchData{
+    color: var(--secondary-text-color);
+    font-size: var(--font-md);
+}
+.allJobs{
+    color: var(--secondary-text-color);
+    font-weight: 500;
+}
+
+@media screen and (max-width: 768px) {
+    .mainContent {
+        width: 90vw; 
+        padding: 2vh 3vw;
+    }
+
+    .searchInput {
+        height: 7vh; 
+        border-radius: 1vh;
+        padding: 0.5vh 2vw;
+    }
+
+    .searchInput img {
+        width: 6vw; 
+        height: auto;
+    }
+
+    .searchInput input {
+        font-size: var(--font-base); 
+        width: 85%; 
+    }
+
+    .categories {
+        flex-direction: row; 
+        justify-content: center;
+    }
+
+    .categories div {
+        text-align: center;
+        padding: 1.5vh 3vw;
+    }
+
+    .jobList {
+        flex-direction: column; 
+        align-items: center;
+    }
+
+    .jobList .item {
+        flex: 1 1 100%; 
+    }
+
+
+    .loadMore {
+        width: 60vw; 
+        height: 6vh;
+        font-size: var(--font-base);
+    }
+}

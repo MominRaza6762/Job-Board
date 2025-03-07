@@ -1,0 +1,133 @@
+.custom-profilePage {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: var(--bg-color);
+    align-items: center;
+  }
+  
+  .custom-profile-container {
+    min-width: 30vw;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .custom-profile-card {
+    background: var(--bg-color);
+    padding: 2rem;
+    border-radius: 1.5vh;
+    box-shadow: var(--card-shadow);
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    color: var(--text-color);
+  }
+  
+  .custom-profile-title {
+    font-size: 1.8rem;
+  }
+  
+  .custom-profile-details p {
+    font-size: 1rem;
+    margin: 2vh 0;
+  }
+  
+  .custom-theme-toggle {
+    margin: 1.5rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-switch {
+    position: relative;
+    display: inline-block;
+    width: 1.5vw;
+    height: 3vh;
+}
+
+.custom-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.custom-slider {
+    position: absolute;
+    cursor: pointer;
+    background-color: black;
+    border-radius: 2vh;
+    width: 100%;
+    height: 100%;
+    transition: 0.4s;
+}
+
+.custom-switch input:checked + .custom-slider {
+    background-color: white;
+}
+
+.custom-toggle-label {
+    margin-left: 1.5vw;
+    font-size: 1rem;
+    color: var(--text-color);
+  }
+  
+  .custom-edit-btn {
+    background-color: var(--button-color);
+    color: var(--button-text-color);
+    border: none;
+    padding: 1vh 1vw;
+    border-radius: 1vh;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .custom-profile-card .delete-btn{
+    background-color: red;
+    margin-left: 1vw;
+  }
+  
+  
+  @media screen and (max-width: 768px) {
+    .custom-profile-container{
+      width: 100vw;
+    }
+
+    .custom-profile-card .delete-btn{
+      margin-left: 3vw;
+    }
+   
+    .custom-profile-card {
+        width: 80%;
+        padding: 1.5rem;
+    }
+
+    .custom-profile-title {
+        font-size: 1.5rem;
+    }
+
+    .custom-profile-details p {
+        font-size: 0.9rem;
+        margin: 1.5vh 0;
+    }
+
+    .custom-theme-toggle {
+        gap: 3vh;
+    }
+
+    .custom-switch {
+        width: 5vw;
+        height: 2.5vh;
+    }
+
+    .custom-toggle-label {
+        font-size: 0.9rem;
+    }
+
+    .custom-edit-btn {
+        font-size: 1rem;
+        padding: 0.8vh 3vw;
+    }
+}
