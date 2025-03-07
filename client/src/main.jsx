@@ -8,80 +8,98 @@ import "./assets/index.css";
 import App from "./App.jsx";
 import React, { useEffect } from "react";
 
-const showErrorOnPage = (message) => {
-  // Agar error div pehle se hai, use update karo
-  let errorDiv = document.getElementById("global-error-div");
-  if (!errorDiv) {
-    // Naya div create karo agar pehle nahi hai
-    errorDiv = document.createElement("div");
-    errorDiv.id = "global-error-div";
-    document.body.appendChild(errorDiv);
+// 🛠 Function jo errors ko body me append karega
+const appendLogToPage = (type, message) => {
+  let logContainer = document.getElementById("log-container");
+
+  if (!logContainer) {
+    logContainer = document.createElement("div");
+    logContainer.id = "log-container";
+    document.body.appendChild(logContainer);
+
+    // Style for logs
+    logContainer.style.position = "fixed";
+    logContainer.style.bottom = "10px";
+    logContainer.style.left = "10px";
+    logContainer.style.width = "50%";
+    logContainer.style.maxHeight = "200px";
+    logContainer.style.overflowY = "auto";
+    logContainer.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+    logContainer.style.color = "white";
+    logContainer.style.padding = "10px";
+    logContainer.style.borderRadius = "5px";
+    logContainer.style.zIndex = "9999";
+    logContainer.style.fontSize = "12px";
+    logContainer.style.fontFamily = "monospace";
   }
 
-  // Error ko show karne ka style
-  errorDiv.innerText = message;
-  errorDiv.style.position = "fixed";
-  errorDiv.style.bottom = "10px";
-  errorDiv.style.left = "10px";
-  errorDiv.style.backgroundColor = "red";
-  errorDiv.style.color = "white";
-  errorDiv.style.padding = "10px";
-  errorDiv.style.borderRadius = "5px";
-  errorDiv.style.fontWeight = "bold";
-  errorDiv.style.zIndex = "9999";
+  const logDiv = document.createElement("div");
+  logDiv.innerText = `[${type.toUpperCase()}] ${message}`;
+
+  if (type === "error") logDiv.style.color = "red";
+  if (type === "warn") logDiv.style.color = "yellow";
+  if (type === "log") logDiv.style.color = "lightgray";
+
+  logContainer.appendChild(logDiv);
 };
 
-const GlobalErrorHandler = ({ children }) => {
+// 🛠 Global Error Handling Component
+const GlobalLogger = ({ children }) => {
   useEffect(() => {
-    const handleError = (message, source, lineno, colno, error) => {
-      const errorMsg = `Error: ${message} at ${source}:${lineno}:${colno}`;
+    // Console logs capture karna
+    const originalConsoleLog = console.log;
+    console.log = (...args) => {
+      appendLogToPage("log", args.join(" "));
+      originalConsoleLog(...args);
+    };
+
+    // Console warnings capture karna
+    const originalConsoleWarn = console.warn;
+    console.warn = (...args) => {
+      appendLogToPage("warn", args.join(" "));
+      originalConsoleWarn(...args);
+    };
+
+    // Console errors capture karna
+    const originalConsoleError = console.error;
+    console.error = (...args) => {
+      appendLogToPage("error", args.join(" "));
+      originalConsoleError(...args);
+    };
+
+    // Global errors capture karna
+    window.onerror = (message, source, lineno, colno, error) => {
+      const errorMsg = `${message} at ${source}:${lineno}:${colno}`;
       console.error(errorMsg);
-      showErrorOnPage(errorMsg);
     };
 
-    const handlePromiseRejection = (event) => {
+    // Unhandled promise rejection handle karna
+    window.addEventListener("unhandledrejection", (event) => {
       console.error("Unhandled Promise Rejection:", event.reason);
-      showErrorOnPage(`Unhandled Promise Rejection: ${event.reason}`);
-    };
-
-    // 🛠 API Errors handle karne ke liye
-    const originalFetch = window.fetch;
-    window.fetch = async (...args) => {
-      try {
-        const response = await originalFetch(...args);
-        if (!response.ok) {
-          throw new Error(`HTTP Error: ${response.status} - ${response.statusText}`);
-        }
-        return response;
-      } catch (error) {
-        console.error("API Error:", error);
-        showErrorOnPage(`API Error: ${error.message}`);
-        throw error;
-      }
-    };
-
-    window.onerror = handleError;
-    window.addEventListener("unhandledrejection", handlePromiseRejection);
+    });
 
     return () => {
       window.onerror = null;
-      window.removeEventListener("unhandledrejection", handlePromiseRejection);
-      window.fetch = originalFetch;
+      window.removeEventListener("unhandledrejection", () => {});
+      console.log = originalConsoleLog;
+      console.warn = originalConsoleWarn;
+      console.error = originalConsoleError;
     };
   }, []);
 
   return <>{children}</>;
 };
 
+// 🛠 Render the app with GlobalLogger
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <ThemeProvider>
       <JobsProvider>
         <BackEndApiProvider>
           <UserDataProvider>
-            <GlobalErrorHandler>
+            <GlobalLogger>
               <App />
-            </GlobalErrorHandler>
+            </GlobalLogger>
           </UserDataProvider>
         </BackEndApiProvider>
       </JobsProvider>
