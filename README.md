@@ -80,8 +80,6 @@ You can check the live version of the application here:
 3. Set up environment variables (.env):
    PORT (server port)
 
-JWT_SECRET (secret key for JWT)
-
-CLOUDINARY_URL (Cloudinary URL for image uploads)
-
-MONGO_URI (MongoDB connection URI)
+- JWT_SECRET (secret key for JWT)
+- CLOUDINARY_URL (Cloudinary URL for image uploads)
+- MONGO_URI (MongoDB connection URI)
