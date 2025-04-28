@@ -83,3 +83,40 @@ You can check the live version of the application here:
 - JWT_SECRET (secret key for JWT)
 - CLOUDINARY_URL (Cloudinary URL for image uploads)
 - MONGO_URI (MongoDB connection URI)
+4. Start the backend server:
+   ```bash
+   npm start
+   
+---
+
+## Frontend Setup
+
+1. Navigate to the client folder:
+   ```bash
+   cd client
+2. Install frontend dependencies:
+   ```bash
+   npm install
+3. Update backend API URLs in the frontend (src/api.js) to match your backend.
+4. Run the frontend server:
+   ```bash
+   npm run dev
+
+---
+
+## API Endpoints
+**User Authentication:**
+- POST /api/auth/register: Register a new user.
+- POST /api/auth/login: Login and receive JWT token.
+- GET /api/auth/me: Get user information (Private route).
+
+**Job Management:**
+- POST /api/jobs: Create a new job (Private route).
+- GET /api/jobs: Get all jobs (Public route).
+- GET /api/jobs/:id: Get job by ID (Public route).
+- PUT /api/jobs/:id: Update job (Private route for owner/admin).
+- DELETE /api/jobs/:id: Delete job (Private route for owner/admin).
+
+**Job Applications:**
+- POST /api/applications: Apply for a job (Private route).
+- GET /api/applications/:id: Get application details (Private route for user/admin).
