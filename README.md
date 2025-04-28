@@ -14,8 +14,6 @@ A complete Job Board application where job seekers can apply for jobs, employers
 - [Frontend Setup](#frontend-setup)
 - [API Endpoints](#api-endpoints)
 - [Usage](#usage)
-- [License](#license)
-- [Screenshots](#screenshots)
 
 ---
 
@@ -120,3 +118,13 @@ You can check the live version of the application here:
 **Job Applications:**
 - POST /api/applications: Apply for a job (Private route).
 - GET /api/applications/:id: Get application details (Private route for user/admin).
+
+---
+
+# Usage
+
+**Visit the live demo or host the app locally.**
+
+1. Create an account as either an employer or job seeker.
+2. Employers can post jobs, and job seekers can apply for jobs.
+3. Admins can manage job listings, user permissions, and applications.
