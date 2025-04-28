@@ -72,3 +72,16 @@ You can check the live version of the application here:
    ```bash
    git clone https://github.com/MominRaza6762/Job-Board.git
    cd Job-Board
+2. Install dependencies:
+
+   ```bash
+   cd server
+   npm install
+3. Set up environment variables (.env):
+   PORT (server port)
+
+JWT_SECRET (secret key for JWT)
+
+CLOUDINARY_URL (Cloudinary URL for image uploads)
+
+MONGO_URI (MongoDB connection URI)
