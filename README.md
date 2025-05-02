@@ -43,10 +43,9 @@ You can check the live version of the application here:
 
 ### Admin Features:
 
-1. **Approve Job Listings**: Admins can review job postings and approve or reject them before they are visible to the public.
+1. **View All Applications**: Admins can view all job applications submitted by users and ensure compliance.
 2. **Delete Job Listings**: Admins can remove job listings that are outdated or violate platform guidelines.
-3. **View All Applications**: Admins can view all job applications submitted by users and ensure compliance.
-4. **Manage User Roles**: Admins can manage user roles (grant/revoke permissions) to control who can post jobs and manage content.
+3. **Manage User Roles**: Admins can manage user roles (grant/revoke permissions) to control who can post jobs and manage content.
 
 ### Employer Features:
 
