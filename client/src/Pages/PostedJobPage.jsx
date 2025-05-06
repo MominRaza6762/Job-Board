@@ -74,7 +74,7 @@ export default function PostedJobPage() {
       <Navbar />
       <ToastContainer/>
       <div className="tableContent">
-      <h1 className="applications-title">Your Applications</h1>
+      <h1 className="applications-title">Your Posted Jobs</h1>
       {notFoundFlag?<div>No applications found</div>:<div className="applications-content">
         <div className="applications-header">
           <span className="header-item">Title</span>
