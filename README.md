@@ -1,4 +1,4 @@
-# Job Board Web Application
+# Job Board
 
 A complete Job Board application where job seekers can apply for jobs, employers can post job listings, and admins can manage all aspects of the platform. The app is built using the MERN stack (MongoDB, Express, React, Node.js) and includes JWT authentication, file uploads, and user roles management.
 
