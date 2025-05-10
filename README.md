@@ -28,7 +28,7 @@ The Job Board web application is designed to allow job seekers to search for job
 You can check the live version of the application here:  
 [Job Board Live Demo](https://job-board-client-delta.vercel.app/)
 
-Admin Dashboard
+For Admin Dashboard sign in with <br>
 Username : test@admin.com
 Password : 123456
 
