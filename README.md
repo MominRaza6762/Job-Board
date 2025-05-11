@@ -30,7 +30,9 @@ You can check the live version of the application here:
 
 For Admin Dashboard sign in with <br>
 Username : test@admin.com
-Password : 123456
+Password : 123456 <br>
+
+**Note**: These are **dummy credentials** created solely for testing purposes. They will only work with this demo version of the Job Board application. They are not used in any real applications or production environments.
 
 ---
 
